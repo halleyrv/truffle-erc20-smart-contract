@@ -105,4 +105,13 @@ contract("customERC20", accounts =>{
     assert.equal(_allowance4_250, 250);
 
   });
+
+  it('burn', async() =>{
+    let instance = await customERC20.deployed();
+    let _total_balance = await instance.balanceOf(accounts[0])
+    await instance.destruirTokens(accounts[0],_total_balance);
+    let _total_balance2 = await instance.balanceOf(accounts[0]);
+    assert.equal(_total_balance2,0);
+
+  }); 
 });
